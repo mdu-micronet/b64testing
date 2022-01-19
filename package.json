@@ -1,0 +1,14 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "mdu@micronetbd.org",
+  "license": "ISC",
+  "dependencies": {
+    "prompt": "^1.2.1"
+  }
+}
