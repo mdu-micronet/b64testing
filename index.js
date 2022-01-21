@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 function _base64ToArrayBuffer(base64string) {
   // decode base64 string to binary string
   // get length of binary string
@@ -12,12 +14,25 @@ function _base64ToArrayBuffer(base64string) {
   }
 
   console.log("the bytes: " + bytes);
+  const newArr = [];
 
-  let newArr = [];
+  // iterate over each value in the bytes buffer
   bytes.forEach(function (value, i) {
-    newArr.push(value.toString(2).padStart(8, "0"));
+    let niceText = "";
+    newArr.push(value.toString(2).padStart(8, "0")); //convert decimal value to base2 + append with 0s to format in lengths of 8 bits
+    niceText +=  `${newArr}`
+
   });
-  console.log(newArr);
+
+  fs.appendFile('./newOutFile.csv', JSON.stringify(newArr)+"\n", {'flag':'a'}, err => {
+    if(err) {
+      console.log(err)
+      return
+    }
+  })
+
+
+  //console.log(newArr);
 
   /*   console.log("DATAVIEW of byteBuff: ")
   console.log(new DataView(byteBuff))
@@ -32,13 +47,14 @@ function _base64ToArrayBuffer(base64string) {
 
   // parse that new string into JSON format
   const buffParse = JSON.parse(buffString);
-  return buffParse;
+
+
 }
 
 if (typeof Buffer.from === "function") {
   // declare the base64 encoded string
   // log it out
-  
+
   b64stringArray = [
     "gAAA",
     "QAAA",
@@ -80,23 +96,18 @@ if (typeof Buffer.from === "function") {
     "AAAAAAQA",
   ];
  
-  console.log(`==== Begin ====`);
+/*   console.log(`==== Begin ====`);
   console.log(`The original base64 string is "${b64stringArray[0]}"`);
-  // create a buffer called buff from the original base64string
-  // pass it into Buffer.from(str, "encoding")
-  // tell Buffer to decode the base64 string using base64
-
   const buf = Buffer.from(b64stringArray[0], "base64"); 
   console.log(`The decoded b64 string "${b64stringArray[0]}" is : ${buf}`);
-
-  // re-encode the decoded string using base64
   const buf2 = buf.toString("base64");
   console.log(`The decoded string "${buf} " REencoded into base64 :  ${buf2}`); 
 
-  _base64ToArrayBuffer(b64stringArray[0]);
+  _base64ToArrayBuffer(b64stringArray[0]); */
+
 }
 
-console.log(b64stringArray[0])
+//console.log(b64stringArray)
 
 for (let element of b64stringArray) {
   console.log(element)
