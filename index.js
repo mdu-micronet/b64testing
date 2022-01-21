@@ -83,9 +83,9 @@ if (typeof Buffer.from === "function") {
   console.log(`The decoded b64 string "${b64stringArray[0]}" is : ${buf}`);
   const buf2 = buf.toString("base64");
   console.log(`The decoded string "${buf} " REencoded into base64 :  ${buf2}`); 
-
   _base64ToArrayBuffer(b64stringArray[0]); */
 }
+
 for (let element of b64stringArray) {
   console.log(element);
   _base64ToArrayBuffer(element);
