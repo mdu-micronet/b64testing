@@ -95,10 +95,10 @@ if (typeof Buffer.from === "function") {
 
   _base64ToArrayBuffer(b64stringArray[0]);
 }
-/* }
-console.log(base64string)
+
+console.log(b64stringArray[0])
 
 for (let element of b64stringArray) {
   console.log(element)
   _base64ToArrayBuffer(element)
-} */
+}
