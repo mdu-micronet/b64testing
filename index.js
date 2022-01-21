@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 
 function _base64ToArrayBuffer(base64string) {
   // decode base64 string to binary string
@@ -12,49 +12,30 @@ function _base64ToArrayBuffer(base64string) {
   for (var i = 0; i < len; i++) {
     bytes[i] = binary_string.charCodeAt(i);
   }
-
   console.log("the bytes: " + bytes);
-  const newArr = [];
 
+  const newArr = [];
   // iterate over each value in the bytes buffer
   bytes.forEach(function (value, i) {
     let niceText = "";
     newArr.push(value.toString(2).padStart(8, "0")); //convert decimal value to base2 + append with 0s to format in lengths of 8 bits
-    niceText +=  `${newArr}`
-
+    niceText += `${newArr}`;
   });
 
-  fs.appendFile('./newOutFile.csv', JSON.stringify(newArr)+"\n", {'flag':'a'}, err => {
-    if(err) {
-      console.log(err)
-      return
+  fs.appendFile(
+    "./newOutFile.csv",
+    JSON.stringify(newArr) + "\n",
+    { flag: "a" },
+    (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
     }
-  })
-
-
-  //console.log(newArr);
-
-  /*   console.log("DATAVIEW of byteBuff: ")
-  console.log(new DataView(byteBuff))
-  // be careful when logging out buffers, if part of text literal youwont get verbose output
-  console.log(
-    "Value of byteBuff (in its own console.log): "
   );
-  console.log(byteBuff); */
-
-  // stringify the array [bytes]
-  const buffString = JSON.stringify(bytes);
-
-  // parse that new string into JSON format
-  const buffParse = JSON.parse(buffString);
-
-
 }
 
 if (typeof Buffer.from === "function") {
-  // declare the base64 encoded string
-  // log it out
-
   b64stringArray = [
     "gAAA",
     "QAAA",
@@ -95,8 +76,8 @@ if (typeof Buffer.from === "function") {
     "AAAAAAgA",
     "AAAAAAQA",
   ];
- 
-/*   console.log(`==== Begin ====`);
+
+  /*   console.log(`==== Begin ====`);
   console.log(`The original base64 string is "${b64stringArray[0]}"`);
   const buf = Buffer.from(b64stringArray[0], "base64"); 
   console.log(`The decoded b64 string "${b64stringArray[0]}" is : ${buf}`);
@@ -104,12 +85,8 @@ if (typeof Buffer.from === "function") {
   console.log(`The decoded string "${buf} " REencoded into base64 :  ${buf2}`); 
 
   _base64ToArrayBuffer(b64stringArray[0]); */
-
 }
-
-//console.log(b64stringArray)
-
 for (let element of b64stringArray) {
-  console.log(element)
-  _base64ToArrayBuffer(element)
+  console.log(element);
+  _base64ToArrayBuffer(element);
 }
